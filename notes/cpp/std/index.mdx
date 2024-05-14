@@ -1,0 +1,78 @@
+import { ArticleCards } from '@site/src/components/article-cards';
+
+# Стандартная библиотека
+
+<dfn>C++ Standard Library</dfn> (стандартная библиотека C++) — набор классов
+и функций, написанных на самом языке и являющихся частью стандарта C++.
+
+<dfn>Standard Template Library / STL</dfn> (стандартная библиотека шаблонов) —
+подмножество стандартной библиотеки, набор согласованных обобщённых алгоритмов
+и контейнеров.
+
+## Контейнеры {#containers}
+
+<ArticleCards data={[
+  {
+    link: 'https://en.cppreference.com/w/cpp/container/vector',
+    label: 'vector', desc: 'Динамический массив',
+  },
+  {
+    link: 'https://en.cppreference.com/w/cpp/container/array',
+    label: 'array', desc: 'Статический массив',
+  },
+  {
+    link: 'https://en.cppreference.com/w/cpp/container/list',
+    label: 'list', desc: 'Двусвязный список',
+  },
+  {
+    link: '/map',
+    label: 'map', desc: 'Ассоциативный массив',
+  },
+  {
+    link: 'https://en.cppreference.com/w/cpp/utility/tuple',
+    label: 'pair & tuple', desc: 'Кортежи',
+  }
+]}/>
+
+### Строки {#strings}
+
+<ArticleCards data={[
+  {
+    link: '/string',
+    label: 'string', desc: 'Строка',
+  },
+  {
+    link: 'https://en.cppreference.com/w/cpp/string/basic_string_view',
+    label: 'string_view', desc: 'Ссылка на строку',
+  },
+]}/>
+
+### Элементы динамической типизации {#dynamic-typing}
+
+<ArticleCards data={[
+  {
+    link: '/optional',
+    label: 'optional', desc: 'Значение заданного типа или ничего',
+  },
+  {
+    link: 'https://en.cppreference.com/w/cpp/utility/variant',
+    label: 'variant', desc: 'Значение одного из нескольких типов',
+  },
+  {
+    link: 'https://en.cppreference.com/w/cpp/utility/any',
+    label: 'any', desc: 'Значение произвольного типа',
+  },
+]}/>
+
+## Другое {#other}
+
+<ArticleCards data={[
+  {
+    link: 'https://en.cppreference.com/w/cpp/header/iostream',
+    label: 'iostream', desc: 'Потоки ввода-вывода',
+  },
+  {
+    link: 'https://en.cppreference.com/w/cpp/chrono',
+    label: 'chrono', desc: 'Утилиты даты и времени',
+  },
+]}/>

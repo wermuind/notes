@@ -1,0 +1,24 @@
+.article-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5em;
+}
+
+.article-cards a {
+  padding: 1em;
+  border-radius: 4px;
+  background-color: #232425;
+  border: 1px solid transparent;
+  transition: border 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.article-cards a:hover {
+  border: 1px solid #7c8d9d;
+}
+
+.article-cards .card-desc {
+  color: #e3e3e3;
+  font-size: 0.9em;
+}

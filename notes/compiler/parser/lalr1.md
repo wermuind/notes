@@ -1,0 +1,144 @@
+# LALR(1) parser
+
+LALR-by-SLR.
+
+1. LR(0) item sets & translation table
+2. Extended grammar
+3. [FIRST sets](first-follow.md)
+4. [FOLLOW sets](first-follow.md)
+5. Action & goto table
+   + initialize
+   + gotos
+   + shifts
+   + reductions
+
+## Item set collection
+
+### Item
+
+**Item** (элемент) — правило грамматики с позицией.<br/>
+Позиция как правило обозначается точкой.
+
++ $$ A \to \cdot B $$ означает "$$ B $$ вот-вот встретится"
++ $$ A \to B \cdot $$ означает "$$ B $$ только что встретился"
+
+### Алгоритм CLOSURE
+
+Если $$ I $$ — множество элементов грамматики $$ G $$, тогда $$ CLOSURE(I) $$
+_(замыкание)_ — это множество элементов, построенное из $$ I $$ по следующим
+шагам:
+
+1. Множество инициализируется всеми элементами из $$ I $$.
+2. Если элемент $$ A \to \alpha \cdot B \beta $$ находится во множестве
+   (т.е. непосредственно за точкой следует нетерминал) и $$ B \to \delta $$ —
+   правило грамматики, то во множество добавляется элемент
+   $$ B \to \cdot \delta $$, если его ещё нет.
+3. Предыдущий шаг повторяется до тех пор, пока добавляются новые элементы.
+
+Множество элементов, которые были добавлены на этапе инициализации, называется
+**ядром**.
+
+<details>
+<summary>Пример</summary>
+
+Грамматика:
+
+<ol start="0">
+  <li>$$ S \to N $$</li>
+  <li>$$ N \to V=E $$</li>
+  <li>$$ N \to E $$</li>
+  <li>$$ E \to V $$</li>
+  <li>$$ V \to x $$</li>
+  <li>$$ V \to *E $$</li>
+</ol>
+
+Начальный набор: $$ \Set{ S \to \cdot N } $$
+
+$$
+\begin{cases}
+  \boxed{ S \to \cdot N }
+\end{cases}
+\rArr
+\begin{cases}
+  \boxed{ S \to \cdot N }       \\
+  \color{beige} N \to \cdot V=E \\
+  \color{beige} N \to \cdot E
+\end{cases}
+  \rArr
+\begin{cases}
+  \boxed{ S \to \cdot N }     \\
+  N \to \cdot V=E             \\
+  N \to \cdot E               \\
+  \color{beige}V \to \cdot x  \\
+  \color{beige}V \to \cdot *E \\
+  \color{beige}E \to \cdot V
+\end{cases}
+$$
+
+</details>
+
+### Алгоритм GOTO
+
+Если $$ I $$ — множество элементов, а $$ X $$ — символ грамматики, то
+$$ GOTO(I, X) $$ определяется как замыкание таких элементов
+$$ A \to \alpha X \cdot \beta $$, что элемент $$ A \to \alpha \cdot X \beta $$
+принадлежит $$ I $$.
+
+Этот алгоритм используется для определения переходов между состояниями LR(0)
+автомата. Набор состояний конечного автомата соответствует множествам
+элементов, а GOTO определяет переход из $$ I $$ при вводе $$ X $$.
+
+## Расширенная грамматика
+
+Обозначения:
+
++ $$ {_0 * _2} \equiv I_0 \overset{*}{\to} I_2 $$ — переход от $$ I_0 $$ к
+  $$ I_2 $$ через подачу на вход $$ * $$
++ $$ {_2 E _6} \equiv I_2 \overset{E}{\to} I_6 $$ — переход от $$ I_2 $$ к
+  $$ I_6 $$ через подачу на вход $$ E $$
++ $$ {_0 V _3} \equiv I_0 \overset{V}{\to} I_3 $$ — переход от $$ I_0 $$ к
+  $$ I_3 $$ через подачу на вход $$ V $$
+
+Общий шаблон:
+
+$$
+{{\color{coral}_a} S _b} \to
+{{\color{coral}_a} X {\color{orange}_c}} \space
+{{\color{orange}_c} Y {\color{orange}_d}} \space
+{{\color{orange}_d} Z _e}
+$$
+
+Для пустого правила конечная точка это первая цифра:
+
+$$
+{{\color{coral}_i} X _j} \to \epsilon
+$$
+
+## Генерация таблицы
+
+Разрешение конфликтов:
+1. shift/reduce $$\to$$ shift
+2. reduce/reduce $$\to$$ reduce по более длинному правилу
+
+## Проблемные правила
+
+Поиск LR(2): для каждой позиции сравниваем поведение LR(1) и LR(2), если
+разное, то правило невалидное. Часто LR(2)-правило можно преобразовать.
+
+```text
+params
+  : '(' (param (',' param)* ','?)? ')'
+  ;
+```
+
+```text
+params
+  : '(' param (',' param)* ')'
+  | '(' (param ',')* ')'
+  ;
+```
+
+--- --- ---
+
+Очень подробное описание на примере простой грамматики:<br/>
+[http://web.cs.dal.ca:80/~sjackson/lalr1.html](https://web.archive.org/web/20210507215636/http://web.cs.dal.ca:80/~sjackson/lalr1.html)
