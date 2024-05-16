@@ -29,6 +29,7 @@ const sidebar: SidebarsConfig[string] = [
       },
       {type: 'doc', id: 'cpp/cpp-style-guide', label: 'Style Guide'},
       {type: 'doc', id: 'cpp/libraries', label: 'Библиотеки'},
+      {type: 'doc', id: 'cpp/cmake', label: 'CMake'},
     ],
   },
   {
@@ -38,6 +39,7 @@ const sidebar: SidebarsConfig[string] = [
       {type: 'doc', id: 'js/ts-style-guide', label: 'Style Guide'},
       {type: 'doc', id: 'js/ts-code', label: 'Фрагменты кода'},
       {type: 'doc', id: 'js/object', label: 'Object'},
+      {type: 'doc', id: 'js/iterator', label: 'Итераторы'},
       {type: 'doc', id: 'js/standards', label: 'Стандарты'},
       {type: 'doc', id: 'js/jsdoc', label: 'JSDoc'},
     ],
