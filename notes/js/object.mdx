@@ -1,3 +1,5 @@
+import { CodeBlock } from '@site/src/components/code-block';
+
 # Объекты в JS
 
 Объект в JavaScript определяется [спецификацией][ecma] как набор **свойств**.
@@ -47,13 +49,55 @@
 
 ### Пример
 
-```js
-const point = {x: 0, y: 1};
-```
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "keyword.js", "value": "const"},
+  {"type": "", "value": " point = {"},
+  {"type": "identifier.field.js", "value": "x"},
+  {"type": "", "value": ": "},
+  {"type": "number.js", "value": "0"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "y"},
+  {"type": "", "value": ": "},
+  {"type": "number.js", "value": "1"},
+  {"type": "", "value": "};"},
+]}/>
 
-```text
-{
-  x: {value: 0, writable: true, enumerable: true, configurable: true},
-  y: {value: 1, writable: true, enumerable: true, configurable: true},
-}
-```
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "", "value": "{\n  "},
+  {"type": "identifier.field.js", "value": "x"},
+  {"type": "", "value": ": {"},
+  {"type": "identifier.field.js", "value": "value"},
+  {"type": "", "value": ": "},
+  {"type": "number.js", "value": "0"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "writable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "enumerable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "configurable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": "},\n  "},
+  {"type": "identifier.field.js", "value": "y"},
+  {"type": "", "value": ": {"},
+  {"type": "identifier.field.js", "value": "value"},
+  {"type": "", "value": ": "},
+  {"type": "number.js", "value": "1"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "writable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "enumerable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "configurable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": "},\n}\n"},
+]}/>

@@ -2,8 +2,8 @@
 
 [Фрагменты кода](ts-code.md)
 
-[Object](object.md)
+[Object](object.mdx)
 
 [Стардарты языка](standards.md)
 
-[JSDoc](jsdoc.md)
+[JSDoc](jsdoc.mdx)

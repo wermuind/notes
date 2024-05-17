@@ -1,3 +1,5 @@
+import { CodeBlock } from '@site/src/components/code-block';
+
 # LALR(1) parser
 
 LALR-by-SLR.
@@ -125,18 +127,42 @@ $$
 Поиск LR(2): для каждой позиции сравниваем поведение LR(1) и LR(2), если
 разное, то правило невалидное. Часто LR(2)-правило можно преобразовать.
 
-```text
-params
-  : '(' (param (',' param)* ','?)? ')'
-  ;
-```
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "", "value": "params\n  : "},
+  {"type": "string.regex.text.js", "value": "'('"},
+  {"type": "", "value": " (param ("},
+  {"type": "string.regex.text.js", "value": "','"},
+  {"type": "", "value": " param)"},
+  {"type": "string.regex.quantifier.js", "value": "*"},
+  {"type": "", "value": " "},
+  {"type": "string.regex.text.js", "value": "','"},
+  {"type": "string.regex.quantifier.js", "value": "?"},
+  {"type": "", "value": ")"},
+  {"type": "string.regex.quantifier.js", "value": "?"},
+  {"type": "", "value": " "},
+  {"type": "string.regex.text.js", "value": "')'"},
+  {"type": "", "value": "\n  ;"},
+]}/>
 
-```text
-params
-  : '(' param (',' param)* ')'
-  | '(' (param ',')* ')'
-  ;
-```
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "", "value": "params\n  : "},
+  {"type": "string.regex.text.js", "value": "'('"},
+  {"type": "", "value": " param ("},
+  {"type": "string.regex.text.js", "value": "','"},
+  {"type": "", "value": " param)"},
+  {"type": "string.regex.quantifier.js", "value": "*"},
+  {"type": "", "value": " "},
+  {"type": "string.regex.text.js", "value": "')'"},
+  {"type": "", "value": "\n  | "},
+  {"type": "string.regex.text.js", "value": "'('"},
+  {"type": "", "value": " (param "},
+  {"type": "string.regex.text.js", "value": "','"},
+  {"type": "", "value": ")"},
+  {"type": "string.regex.quantifier.js", "value": "*"},
+  {"type": "", "value": " "},
+  {"type": "string.regex.text.js", "value": "')'"},
+  {"type": "", "value": "\n  ;"},
+]}/>
 
 --- --- ---
 
