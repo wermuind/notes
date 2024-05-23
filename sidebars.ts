@@ -3,6 +3,14 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 const sidebar: SidebarsConfig[string] = [
   {
+    type: 'category', label: 'Общее',
+    link: {type: 'generated-index', title: 'Общее'},
+    items: [
+      {type: 'doc', id: 'common/cli', label: 'Командная строка'},
+      {type: 'doc', id: 'common/semver', label: 'Semantic Versioning'},
+    ],
+  },
+  {
     type: 'category', label: 'C++',
     link: {type: 'doc', id: 'cpp/index'},
     items: [

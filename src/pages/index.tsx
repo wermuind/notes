@@ -21,18 +21,21 @@ export default function Home() {
         <h1>{title}</h1>
       </header>
       <main className={'index-sections'}>
+        <Section link={'/category/общее'} title={'Общее'}>
+          Заметки на общие темы.
+        </Section>
         <Section link={'/cpp'} title={'C++'}>
           Конструкции языка с примерами, мини-гайды и стандартная библиотека.
         </Section>
         <Section link={'/js'} title={'JavaScript'}>
-          Заметки, внутреннее устройство языка, стандарты.
+          Внутреннее устройство, фрагменты кода, стандарты языка.
         </Section>
         <Section link={'/db'} title={'Базы данных'}>
           SQL, устройство БД.
         </Section>
         <Section link={'/compiler'} title={'Теория компиляции'}>
           <ul>
-            <li>Грамматики</li>
+            <li>Грамматика</li>
             <li>Лесический анализ</li>
             <li>Синтаксический анализ</li>
           </ul>
@@ -45,7 +48,7 @@ export default function Home() {
           </ul>
         </Section>
         <Section link={'/category/закладки'} title={'Закладки'}>
-          Полезные ссылки на разные темы.
+          Полезные ссылки на различные темы.
         </Section>
       </main>
     </Layout>

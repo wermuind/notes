@@ -13,7 +13,7 @@
 
 .index-sections {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: stretch;
   gap: 1em;
   padding: 1em;
