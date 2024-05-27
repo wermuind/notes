@@ -49,13 +49,11 @@ const config: Config = {
     },
     navbar: {
       title: 'Главная',
-      logo: {
-        alt: 'logo',
-        src: 'img/logo.svg',
-      },
+      logo: {src: 'img/logo.svg', alt: 'logo'},
       items: [
         {type: 'doc', docId: 'cpp/index', label: 'C++'},
         {type: 'doc', docId: 'js/index', label: 'JavaScript'},
+        {label: 'GitHub', href: 'https://github.com/wermuind', position: 'right'},
       ],
     },
     prism: {
@@ -63,10 +61,6 @@ const config: Config = {
       theme: prismThemes.nightOwlLight,
       darkTheme: prismThemes.vsDark,
     },
-    // footer: {
-    //   style: 'dark',
-    //   copyright: `Copyright © ${new Date().getFullYear()} Wermuind. Built with Docusaurus.`,
-    // },
   } satisfies ThemeConfig,
 
   stylesheets: [
