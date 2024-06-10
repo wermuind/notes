@@ -81,7 +81,7 @@ article img {
 
 article code:not([class]) {
   margin: 0;
-  padding: 0.1rem 0.2rem;
+  padding: 0.05rem 0.15rem;
   white-space: nowrap;
   font: 14px 'JetBrains Mono', monospace;
   font-variant-ligatures: none;

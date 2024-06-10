@@ -1,13 +1,13 @@
 import { CodeBlock } from '@site/src/components/code-block';
 
-# LALR(1) parser
+# LALR
 
-LALR-by-SLR.
+Реализация: **LALR-by-SLR**.
 
 1. LR(0) item sets & translation table
 2. Extended grammar
-3. [FIRST sets](first-follow.md)
-4. [FOLLOW sets](first-follow.md)
+3. FIRST sets
+4. FOLLOW sets
 5. Action & goto table
    + initialize
    + gotos
@@ -24,7 +24,7 @@ LALR-by-SLR.
 + $$ A \to \cdot B $$ означает "$$ B $$ вот-вот встретится"
 + $$ A \to B \cdot $$ означает "$$ B $$ только что встретился"
 
-### Алгоритм CLOSURE
+### Алгоритм CLOSURE {#algorithm-closure}
 
 Если $$ I $$ — множество элементов грамматики $$ G $$, тогда $$ CLOSURE(I) $$
 _(замыкание)_ — это множество элементов, построенное из $$ I $$ по следующим
@@ -79,7 +79,7 @@ $$
 
 </details>
 
-### Алгоритм GOTO
+### Алгоритм GOTO {#algorithm-goto}
 
 Если $$ I $$ — множество элементов, а $$ X $$ — символ грамматики, то
 $$ GOTO(I, X) $$ определяется как замыкание таких элементов
@@ -90,7 +90,7 @@ $$ A \to \alpha X \cdot \beta $$, что элемент $$ A \to \alpha \cdot X 
 автомата. Набор состояний конечного автомата соответствует множествам
 элементов, а GOTO определяет переход из $$ I $$ при вводе $$ X $$.
 
-## Расширенная грамматика
+## Расширенная грамматика {#extended-grammar}
 
 Обозначения:
 
@@ -116,6 +116,68 @@ $$
 {{\color{coral}_i} X _j} \to \epsilon
 $$
 
+## FIRST и FOLLOW {#first-follow}
+
+<dfn>Множество FIRST</dfn> для символа в КС-грамматике – это множество
+терминальных символов, которые могут появиться в начале строк, выводимых
+из символа.
+
+<dfn>Множество FOLLOW</dfn> для символа в КС-грамматике – это множество
+терминальных символов, которые могут следовать непосредственно за данным
+символов в выводе (развёртывании).
+
+### Алгоритм построения FIRST {#algorithm-first}
+
+```python
+# T  - terminals
+# NT - non-terminals
+# P  - rules in grammar
+
+for a in [*T, EOF, EPS]:
+  FIRST(a) = a
+
+for A in NT:
+  FIRST(A) = set()
+
+while FIRST changes:
+  for A -> b[1..k] in P:
+    rhs = FIRST(b[1]) - { EPS }
+    i = 1
+
+    # adding first for eps-gen symbols
+    while EPS in FIRST(b[i]) and i <= k - 1:
+      rhs |= FIRST(b[i + 1]) - { EPS }
+      i += 1
+    if i == k and EPS in FIRST(b[k]):
+      rhs |= { EPS }
+    FIRST(A) |= rhs
+```
+
+### Алгоритм построения FOLLOW {#algorithm-follow}
+
+```python
+# NT - non-terminals
+# P  - rules in grammar
+
+for A in NT:
+  FOLLOW(A) = set()
+
+FOLLOW(S) = { EOF }
+
+while FOLLOW changes:
+  for A -> b[1..k] in P:
+    trailer = FOLLOW(A)
+    for i in range(k, 0, -1):
+      if b[i] in NT:
+        FOLLOW(b[i]) |= trailer
+        if EPS in FIRST(b[i]):
+          trailer |= FIRST(b[i]) - { EPS }
+        else:
+          trailer = FIRST(b[i])
+      else:
+        trailer = FIRST(b[i])
+```
+
 ## Генерация таблицы
 
 Разрешение конфликтов:
@@ -124,8 +186,8 @@ $$
 
 ## Проблемные правила
 
-Поиск LR(2): для каждой позиции сравниваем поведение LR(1) и LR(2), если
-разное, то правило невалидное. Часто LR(2)-правило можно преобразовать.
+Для правила ниже возникает неоднозначность, которую нельзя разрешить
+имея lookahead в один токен.
 
 <CodeBlock theme={'idea'} tokens={[
   {"type": "", "value": "params\n  : "},
@@ -143,6 +205,8 @@ $$
   {"type": "string.regex.text.js", "value": "')'"},
   {"type": "", "value": "\n  ;"},
 ]}/>
+
+Решением как правило является преобразование грамматики.
 
 <CodeBlock theme={'idea'} tokens={[
   {"type": "", "value": "params\n  : "},

@@ -65,7 +65,6 @@ const sidebar: SidebarsConfig[string] = [
     type: 'category', label: 'Теория компиляции',
     link: {type: 'doc', id: 'compiler/index'},
     items: [
-      {type: 'doc', id: 'compiler/language-model', label: 'Модель языка'},
       {
         type: 'category', label: 'Лексический анализ',
         link: {type: 'doc', id: 'compiler/lexer/index'},
@@ -79,9 +78,10 @@ const sidebar: SidebarsConfig[string] = [
         type: 'category', label: 'Синтаксический анализ',
         link: {type: 'doc', id: 'compiler/parser/index'},
         items: [
-          'compiler/parser/grammar-transform',
-          'compiler/parser/first-follow',
-          'compiler/parser/lalr1',
+          'compiler/parser/grammar',
+          'compiler/parser/grammar-extensions',
+          'compiler/parser/bottom-up',
+          'compiler/parser/lalr',
         ],
       },
     ],
