@@ -2,8 +2,8 @@
 
 **Ассемблер** — это программа, транслирующая язык ассемблера в машинный код.
 
-**Язык ассемблера** — низкоуровневый язык, предоставляющий более прямой доступ
-к аппаратным ресурсам компьютера по сравнению с высокоуровневыми языками.
+**Язык ассемблера** — это низкоуровневый язык, предоставляющий более прямой
+доступ к аппаратным ресурсам компьютера по сравнению с высокоуровневыми языками.
 Каждая инструкция в языке ассемблера обычно соответствует одной машинной
 инструкции, что делает его близким к языку машинного кода.
 
@@ -26,7 +26,7 @@ Intel и AT&T. Они различаются в основном в способ
 
 </details>
 
-Инструкция формируется из **мнепоники** (частно называют _опкод_,
+Инструкция формируется из **мнепоники** (иногда называют *опкод*,
 от operation code) и какого-то количества операндов.
 
 Например: `mov eax, 5`; здесь `mov` это мнемоника, а `eax` и `5` — операнды.
@@ -72,10 +72,10 @@ Intel и AT&T. Они различаются в основном в способ
 
 ### Логические операции
 
-+ `and` и `test` — побитовое "и"
-+ `or` — побитовое "или"
-+ `xor` — побитовое исключающее "или"
-+ `cmp` (compare) — сравнение
++ `and` и `test` – побитовое "и"
++ `or` – побитовое "или"
++ `xor` – побитовое исключающее "или"
++ `cmp` (compare) – сравнение
 
 ### Переходы
 
@@ -102,18 +102,18 @@ jl label
 
 Ниже список мнемоник с пояснениями:
 
-+ `je` — jump if equal
-+ `jz` — jump if zero
-+ `jl` — jump if lower
-+ `jg` — jump if greater
-+ `jle` — jump if less or equal
-+ `jge` — jump if greater of equal
-+ `jne` — jump if not equal
-+ `jnz` — jump if not zero
-+ `jnl` — jump if not less
-+ `jng` — jump if not greater
-+ `jnle` — jump if not less or equal
-+ `jnge` — jump if not greater or equal
++ `je` – jump if equal
++ `jz` – jump if zero
++ `jl` – jump if lower
++ `jg` – jump if greater
++ `jle` – jump if less or equal
++ `jge` – jump if greater of equal
++ `jne` – jump if not equal
++ `jnz` – jump if not zero
++ `jnl` – jump if not less
++ `jng` – jump if not greater
++ `jnle` – jump if not less or equal
++ `jnge` – jump if not greater or equal
 
 ### Стек
 

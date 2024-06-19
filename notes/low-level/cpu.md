@@ -33,18 +33,18 @@ TODO.
 
 #### Регистры общего назначения:
 
-`RAX` — accumulator<br/>
-`RBX` — base<br/>
-`RCX` — counter<br/>
-`RDX` — data
+`RAX` – accumulator<br/>
+`RBX` – base<br/>
+`RCX` – counter<br/>
+`RDX` – data
 
-`RSI` — source index<br/>
-`RDI` — destination index
+`RSI` – source index<br/>
+`RDI` – destination index
 
-`RBP` — base (frame) pointer<br/>
-`RSP` — stack pointer<br/>
+`RBP` – base (frame) pointer<br/>
+`RSP` – stack pointer<br/>
 
-`R8 - R15` — регистры, добавленные именно в x86-64; все предыдущие
+`R8 - R15` – регистры, добавленные именно в x86-64; все предыдущие
 унаследованы от x86.
 
 Ввиду обратной совместимости в каждом из вышеперечисленных регистров выделяются
