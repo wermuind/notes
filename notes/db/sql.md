@@ -59,9 +59,23 @@ psql "postgresql://<username>:<password>@<hostname>:<port>/<database>"
 `\password user_name` — изменить пароль<br/>
 
 `\q` — выйти из psql<br/>
-`\! clear` (Unix) и `\! cls` (Windows) — очистить экран<br/>
+`\! clear` (Unix) или `\! cls` (Windows) — очистить экран<br/>
+
+#### Системные каталоги:
+
++ `pg_database`: информация о доступных базах данных
++ `pg_attribute`: информация о столбцах таблицы
++ `pg_constraint`: ограничения (первичный ключ, unique, проверки и др.)
++ `pg_index`: информация об индексах
 
 #### Другое:
+
+```sql
+-- Database Size
+SELECT pg_size_pretty(pg_database_size('db_name'));
+-- Table Size
+SELECT pg_size_pretty(pg_relation_size('table_name'));
+```
 
 Рестарт сервера для Windows:
 
