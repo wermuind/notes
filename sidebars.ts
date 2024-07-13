@@ -92,9 +92,10 @@ const sidebar: SidebarsConfig[string] = [
     link: {type: 'generated-index', title: 'Низкоуровневое программирование'},
     items: [
       {type: 'doc', id: 'low-level/cpu', label: 'Процессор'},
+      {type: 'doc', id: 'low-level/data-structures', label: 'Структуры данных'},
+      {type: 'doc', id: 'low-level/program-structure', label: 'Структура программы'},
       {type: 'doc', id: 'low-level/asm', label: 'Ассемблер'},
       {type: 'doc', id: 'low-level/call-stack', label: 'Стек вызовов'},
-      {type: 'doc', id: 'low-level/program-structure', label: 'Структура программы'},
     ],
   },
   {
