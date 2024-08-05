@@ -1,9 +1,9 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 120" font-family="JetBrains Mono">
 <g fill="#ccc" font-size="16">
   <text x="10" y="20"><tspan fill="#82d2ce">struct</tspan> <tspan fill="#87c3ff">Point3D</tspan> {</text>
-  <text x="10" y="42">&#160;&#160;<tspan fill="#af9cff">x</tspan>: <tspan fill="#82d2ce">f32</tspan>;</text>
-  <text x="10" y="64">&#160;&#160;<tspan fill="#af9cff">y</tspan>: <tspan fill="#82d2ce">f32</tspan>;</text>
-  <text x="10" y="86">&#160;&#160;<tspan fill="#af9cff">z</tspan>: <tspan fill="#82d2ce">f32</tspan>;</text>
+  <text x="10" y="42">&#160;&#160;<tspan fill="#af9cff">x</tspan>: <tspan fill="#87c3ff">f32</tspan>;</text>
+  <text x="10" y="64">&#160;&#160;<tspan fill="#af9cff">y</tspan>: <tspan fill="#87c3ff">f32</tspan>;</text>
+  <text x="10" y="86">&#160;&#160;<tspan fill="#af9cff">z</tspan>: <tspan fill="#87c3ff">f32</tspan>;</text>
   <text x="10" y="108">}</text>
 </g>
 <g fill="none" stroke="#98c8f5">
