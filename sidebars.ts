@@ -60,6 +60,7 @@ const sidebar: SidebarsConfig[string] = [
     link: {type: 'doc', id: 'db/index'},
     items: [
       {type: 'doc', id: 'db/sql', label: 'SQL'},
+      {type: 'doc', id: 'db/normalization', label: 'Нормализация'},
     ],
   },
   {
