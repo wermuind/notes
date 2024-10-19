@@ -1,43 +1,51 @@
 # SQL
 
-#### Операции с базами данных:
+#### Операции с таблицами {#table-operations}
 
 ```sql
--- создать:
-CREATE DATABASE db_name OWNER owner_name;
--- удалить:
-DROP DATABASE db_name;
--- переименовать:
-ALTER DATABASE db_name RENAME TO new_db_name;
-```
-
-#### Операции с таблицами:
-
-```sql
--- создать таблицу:
-CREATE TABLE table_name(col_1_name col_1_type, ...);
--- удалить таблицу:
+-- создать
+CREATE TABLE table_name(name_1 type_1, name_2 type_2);
+-- удалить
 DROP TABLE table_name;
-
--- добавить столбец:
-ALTER TABLE table_name ADD COLUMN column_name;
--- удалить столбец:
-ALTER TABLE table_name DROP COLUMN column_name;
--- переименовать столбец:
-ALTER TABLE table_name RENAME COLUMN old_name TO new_name;
--- изменить тип столбца:
-ALTER TABLE table_name ALTER COLUMN column_name datatype;
+-- переименовать
+ALTER TABLE old_name RENAME TO new_name;
 ```
 
-#### Операции с данными таблицы:
+#### Операции над колонками {#column-operations}
 
 ```sql
--- добавить записи:
-INSERT INTO table_name (col_1, ...) VALUES (col_1_value, ...), (...);
--- удалить записи:
-DELETE FROM table_name WHERE ...;
--- изменить записи:
-UPDATE table_name SET col_1 = col_1_value, col_2 = ... WHERE ...;
+-- добавить
+ALTER TABLE table_name ADD COLUMN column_name column_type;
+-- удалить
+ALTER TABLE table_name DROP COLUMN column_name;
+-- переименовать
+ALTER TABLE table_name RENAME COLUMN old_name TO new_name;
+
+-- добавить/заменить значение по умолчанию
+ALTER TABLE table_name ALTER COLUMN column_name SET DEFAULT expression;
+-- удалить значение по умолчанию
+ALTER TABLE table_name ALTER COLUMN column_name DROP DEFAULT;
+
+-- добавить ограничение на NULL
+ALTER TABLE table_name ALTER COLUMN column_name SET NOT NULL;
+-- снять ограничение на NULL
+ALTER TABLE table_name ALTER COLUMN column_name DROP NOT NULL;
+-- добавить ограничение уникальности
+ALTER TABLE table_name ADD CONSTRAINT name UNIQUE (column_name);
+
+-- изменить тип столбца
+ALTER TABLE table_name ALTER COLUMN column_name TYPE datatype;
+```
+
+#### Операции с данными {#data-operations}
+
+```sql
+-- добавить записи
+INSERT INTO table_name (col_1, col_2) VALUES (value_1, value_2), (...);
+-- удалить записи
+DELETE FROM table_name WHERE expression;
+-- изменить записи
+UPDATE table_name SET col_1 = value_1, col_2 = value_2 WHERE expression;
 -- очистить таблицу:
 TRUNCATE TABLE tablename;
 ```
@@ -50,30 +58,32 @@ psql -h <hostname> -p <port> -U <username> -d <database>
 psql "postgresql://<username>:<password>@<hostname>:<port>/<database>"
 ```
 
-#### Быстрые команды psql:
+#### Быстрые команды psql {#psql-meta-commands}
 
 `\l` — список БД на сервере<br/>
-`\dt` — список таблиц в БД<br/>
+`\c db_name` — подключиться к другой БД<br/>
+`\password user_name` — изменить пароль
+
+`\dt` — список таблиц<br/>
 `\du` — список ролей<br/>
-`\d table_name` — структура таблицы<br/>
-`\password user_name` — изменить пароль<br/>
+`\d table_name` — структура таблицы
 
 `\q` — выйти из psql<br/>
-`\! clear` (Unix) или `\! cls` (Windows) — очистить экран<br/>
+`\! clear` (Unix) или `\! cls` (Windows) — очистить экран
 
-#### Системные каталоги:
+#### Системные таблицы {#pg-system-catalogs}
 
 + `pg_database`: информация о доступных базах данных
 + `pg_attribute`: информация о столбцах таблицы
-+ `pg_constraint`: ограничения (первичный ключ, unique, проверки и др.)
++ `pg_constraint`: ограничения (pkey, unique, check, etc.)
 + `pg_index`: информация об индексах
 
-#### Другое:
+#### Другое {#pg-other}
 
 ```sql
--- Database Size
+-- размер базы данных
 SELECT pg_size_pretty(pg_database_size('db_name'));
--- Table Size
+-- размер таблицы
 SELECT pg_size_pretty(pg_relation_size('table_name'));
 ```
 
