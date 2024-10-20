@@ -58,6 +58,7 @@ const config: Config = {
     },
     prism: {
       defaultLanguage: 'text',
+      additionalLanguages: ['json', 'bash'],
       theme: prismThemes.nightOwlLight,
       darkTheme: prismThemes.vsDark,
     },
