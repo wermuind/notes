@@ -34,8 +34,10 @@ import { CodeBlock } from '@site/src/components/code-block';
 
 ## Пример {#example}
 
-<CodeBlock theme={'idea'} tokens={[
-  {"type": "comment.doc.ts", "value": "/** Округляет число до заданного количества знаков после запятой."},
+<CodeBlock theme={'idea'} ligatures={false} tokens={[
+  {"type": "comment.doc.ts", "value": "/**"},
+  {"type": "", "value": "\n"},
+  {"type": "comment.doc.ts", "value": " * Округляет число до заданного количества знаков после запятой."},
   {"type": "", "value": "\n"},
   {"type": "comment.doc.ts", "value": " * "},
   {"type": "comment.doc.tag.ts", "value": "@param"},

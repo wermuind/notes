@@ -40,8 +40,8 @@ export const CodeBlock = ({theme, tokens, styles, ligatures}: CodeBlockProps) =>
     : undefined;
 
   return (
-    <div className={'code-block'} style={style}>
-      <pre className={theme}>{tokens.map(toElement)}</pre>
+    <div className={'code-block'}>
+      <pre className={theme} style={style}>{tokens.map(toElement)}</pre>
     </div>
   );
 };

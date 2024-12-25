@@ -1,9 +1,8 @@
 # JavaScript
 
-[Фрагменты кода](ts-code.md)
-
-[Object](object.mdx)
-
-[Стардарты языка](standards.md)
-
-[JSDoc](jsdoc.mdx)
++ [Фрагменты кода](snippets.md)
++ [Object](object.mdx)
++ [Итераторы](iterator.mdx)
++ [Регулярные выражения](regex.mdx)
++ [Стардарты языка](standards.md)
++ [JSDoc](jsdoc.mdx)
