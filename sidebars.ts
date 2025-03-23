@@ -8,6 +8,7 @@ const sidebar: SidebarsConfig[string] = [
     items: [
       {type: 'doc', id: 'common/cli', label: 'Командная строка'},
       {type: 'doc', id: 'common/semver', label: 'Semantic Versioning'},
+      {type: 'doc', id: 'common/solid', label: 'Принципы SOLID'},
       {type: 'doc', id: 'common/git', label: 'Git'},
       {type: 'doc', id: 'common/tdd', label: 'Test Driven Development'},
     ],
