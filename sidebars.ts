@@ -47,11 +47,10 @@ const sidebar: SidebarsConfig[string] = [
     type: 'category', label: 'JavaScript',
     link: {type: 'doc', id: 'js/index'},
     items: [
-      {type: 'doc', id: 'js/snippets', label: 'Фрагменты кода'},
+      {type: 'doc', id: 'js/standards', label: 'Стандарты языка'},
       {type: 'doc', id: 'js/object', label: 'Object'},
       {type: 'doc', id: 'js/iterator', label: 'Итераторы'},
       {type: 'doc', id: 'js/regex', label: 'Регулярные выражения'},
-      {type: 'doc', id: 'js/standards', label: 'Стандарты языка'},
       {type: 'doc', id: 'js/jsdoc', label: 'JSDoc'},
     ],
   },
