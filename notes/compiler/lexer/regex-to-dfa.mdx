@@ -1,0 +1,168 @@
+import { CodeBlock } from '@site/src/components/code-block';
+
+# Создание ДКА на основе регулярного выражения
+
+1. [дерево](regex-tree.md)
+2. набор позиций
+3. `nullable`, множества `firstpos` и `lastpos`
+4. множества `followpos`
+5. генерация таблицы
+
+`nullable`, множества `firstpos` и `lastpos` вычисляются для каждого _узла_
+дерева, а `followpos` вычисляется для каждой _позиции_.
+
+### Алгоритмы для nullable, firstpos и lastpos {#algorithms}
+
+A leaf labeled `ε`:
+```
+nullable(n) := true
+firstpos(n) := {}
+lastpos(n)  := {}
+```
+
+A leaf with position `i`:
+```
+nullable(n) := false
+firstpos(n) := {i}
+lastpos(n)  := {i}
+```
+
+An "or"-node `c1 | c2`:
+```
+nullable(n) := nullable(c1) or nullable(c2)
+firstpos(n) := firstpos(c1) U firstpos(c2)
+lastpos(n)  := lastpos(c1) U lastpos(c2)
+```
+
+A "cat"-node `c1 c2`:
+```
+nullable(n) := nullable(c1) and nullable(c2)
+firstpos(n) := nullable(c1) ? firspos(c1) U firspos(c2) : firspos(c1)
+lastpos(n)  := nullable(c2) ? lastpos(c1) U lastpos(c2) : lastpos(c2)
+```
+
+A "star"-node `c1*`:
+```
+nullable(n) := true
+firstpos(n) := firstpos(c1)
+lastpos(n)  := lastpos(c1)
+```
+
+При вычислении этих множеств рекурсия неприемлема, т.к. размер дерева
+может быть очень большим.
+
+### Алгоритм для followpos {#followpos-algorithm}
+
+<CodeBlock theme={'fleet-dark'} tokens={[
+  {"type": "keyword.js", "value": "for"},
+  {"type": "", "value": " "},
+  {"type": "identifier.type.js", "value": "node"},
+  {"type": "", "value": " "},
+  {"type": "identifier.variable.js", "value": "n"},
+  {"type": "", "value": " "},
+  {"type": "keyword.js", "value": "in"},
+  {"type": "", "value": " "},
+  {"type": "identifier.variable.js", "value": "tree"},
+  {"type": "", "value": ":"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  "},
+  {"type": "keyword.js", "value": "if"},
+  {"type": "", "value": " "},
+  {"type": "identifier.variable.js", "value": "n"},
+  {"type": "", "value": " "},
+  {"type": "keyword.js", "value": "is"},
+  {"type": "", "value": " "},
+  {"type": "identifier.type.js", "value": "concat node"},
+  {"type": "", "value": " "},
+  {"type": "keyword.js", "value": "with"},
+  {"type": "", "value": " "},
+  {"type": "identifier.type.js", "value": "left child"},
+  {"type": "", "value": " "},
+  {"type": "identifier.variable.js", "value": "c1"},
+  {"type": "", "value": " "},
+  {"type": "keyword.js", "value": "and"},
+  {"type": "", "value": " "},
+  {"type": "identifier.type.js", "value": "right child"},
+  {"type": "", "value": " "},
+  {"type": "identifier.variable.js", "value": "c2"},
+  {"type": "", "value": ":"},
+  {"type": "", "value": "\n"},
+  {"type": "keyword.js", "value": "    for"},
+  {"type": "", "value": " "},
+  {"type": "identifier.variable.js", "value": "i"},
+  {"type": "", "value": " "},
+  {"type": "keyword.js", "value": "in"},
+  {"type": "", "value": " "},
+  {"type": "identifier.function.call.js", "value": "lastpos"},
+  {"type": "", "value": "("},
+  {"type": "identifier.variable.js", "value": "c1"},
+  {"type": "", "value": "):"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "      "},
+  {"type": "identifier.function.call.js", "value": "followpos"},
+  {"type": "", "value": "("},
+  {"type": "identifier.variable.js", "value": "i"},
+  {"type": "", "value": ") = "},
+  {"type": "identifier.function.call.js", "value": "followpos"},
+  {"type": "", "value": "("},
+  {"type": "identifier.variable.js", "value": "i"},
+  {"type": "", "value": ") U "},
+  {"type": "identifier.function.call.js", "value": "firstpos"},
+  {"type": "", "value": "("},
+  {"type": "identifier.variable.js", "value": "c2"},
+  {"type": "", "value": ")"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  "},
+  {"type": "keyword.js", "value": "else if"},
+  {"type": "", "value": " "},
+  {"type": "identifier.variable.js", "value": "n"},
+  {"type": "", "value": " "},
+  {"type": "keyword.js", "value": "is"},
+  {"type": "", "value": " "},
+  {"type": "identifier.type.js", "value": "Kleene star node"},
+  {"type": "", "value": ":"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "    "},
+  {"type": "keyword.js", "value": "for"},
+  {"type": "", "value": " "},
+  {"type": "identifier.variable.js", "value": "i"},
+  {"type": "", "value": " "},
+  {"type": "keyword.js", "value": "in"},
+  {"type": "", "value": " "},
+  {"type": "identifier.function.call.js", "value": "lastpos"},
+  {"type": "", "value": "("},
+  {"type": "identifier.variable.js", "value": "n"},
+  {"type": "", "value": "):"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "      "},
+  {"type": "identifier.function.call.js", "value": "followpos"},
+  {"type": "", "value": "("},
+  {"type": "identifier.variable.js", "value": "i"},
+  {"type": "", "value": ") = "},
+  {"type": "identifier.function.call.js", "value": "followpos"},
+  {"type": "", "value": "("},
+  {"type": "identifier.variable.js", "value": "i"},
+  {"type": "", "value": ") U "},
+  {"type": "identifier.function.call.js", "value": "firstpos"},
+  {"type": "", "value": "("},
+  {"type": "identifier.variable.js", "value": "n"},
+  {"type": "", "value": ")"}
+]}/>
+
+### Алгоритм построения ДКА
+
+```text
+s0 = firstpos(root-node); designate it the start state
+states = [s0] and is unmarked
+
+while there is an unmarked state T in states:
+  mark T
+  for each input symbol 'a' in the alphabet:
+    let U be the union of followpos(p) for all positions p in T such that
+            the symbol at position p is 'a'
+    if U is not empty and not in states:
+      add U as an unmarked state in states
+    trans[T,a] = U
+
+Designate any state containing the #-position as a final state
+```

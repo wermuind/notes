@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 64" font-size="5" font-family="JetBrains Mono">
+<g fill="none" stroke="#c5d1d1" stroke-width="0.5">
+  <circle cx="32" cy="32" r="8"/>
+  <circle cx="64" cy="32" r="8"/>
+  <circle cx="96" cy="32" r="8"/>
+  <circle cx="128" cy="32" r="8"/>
+  <circle cx="160" cy="32" r="8"/>
+  <circle cx="160" cy="32" r="10"/>
+  <path d="M8,32l16,0 M40,32l16,0 M72,32l16,0 M104,32l16,0 M136,32l14,0"/>
+  <path d="M89,28 C80,9,112,9,103,28"/>
+  <path d="M96,40 C94,55, 130,55, 128,40"/>
+</g>
+<g fill="#c5d1d1" stroke="none">
+  <path d="M24,32l-4,-2l1,2l-1,2Z"/>
+  <path d="M56,32l-4,-2l1,2l-1,2Z"/>
+  <path d="M88,32l-4,-2l1,2l-1,2Z"/>
+  <path d="M120,32l-4,-2l1,2l-1,2Z"/>
+  <path d="M150,32l-4,-2l1,2l-1,2Z"/>
+  <path d="M89,28l0.5,-4l-1.5,2l-2,-0.25Z"/>
+  <path d="M96,40l-1.5,4l1.75,-1l2,0.75Z"/>
+</g>
+<g fill="#c5d1d1" text-anchor="middle">
+  <text x="32" y="34">0</text>
+  <text x="64" y="34">1</text>
+  <text x="96" y="34">2</text>
+  <text x="128" y="34">3</text>
+  <text x="160" y="34">4</text>
+</g>
+<g fill="#91d392" text-anchor="middle">
+  <text x="46" y="29">/</text>
+  <text x="78" y="29">*</text>
+  <text x="110" y="29">*</text>
+  <text x="141" y="29">/</text>
+  <text x="96" y="11"><tspan fill="#c5d1d1">not</tspan> *</text>
+  <text x="112" y="58"><tspan fill="#c5d1d1">not</tspan> /</text>
+</g>
+</svg>

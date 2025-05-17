@@ -1,0 +1,30 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 200" font-family="JetBrains Mono">
+<g fill="#2e3848" stroke="none">
+  <rect x="110" y="30" width="400" height="40"/>
+  <rect x="110" y="130" width="400" height="40"/>
+</g>
+<g fill="none" stroke="#98c8f5">
+  <path d="M10,30L610,30 M10,70L610,70"/>
+  <path d="M110,30L110,70 M210,30L210,70 M310,30L310,70 M410,30L410,70 M510,30L510,70"/>
+  <path d="M10,130L610,130 M10,170L610,170"/>
+  <path d="M110,130L110,170 M210,130L210,170 M310,130L310,170 M410,130L410,170 M510,130L510,170"/>
+</g>
+<g fill="#ccc" font-size="16">
+  <text x="20" y="20">little-endian:</text>
+  <text x="20" y="120">big-endian:</text>
+</g>
+<g fill="#ccc" font-size="16" text-anchor="middle">
+  <text x="310" y="92"><tspan fill="#b5cea8">1240</tspan> as int32</text>
+  <text x="310" y="192"><tspan fill="#b5cea8">1240</tspan> as int32</text>
+</g>
+<g fill="#a9bab8" font-size="17" text-anchor="middle">
+  <text x="160" y="56">11011000</text>
+  <text x="260" y="56">00000100</text>
+  <text x="360" y="56">00000000</text>
+  <text x="460" y="56">00000000</text>
+  <text x="160" y="156">00000000</text>
+  <text x="260" y="156">00000000</text>
+  <text x="360" y="156">00000100</text>
+  <text x="460" y="156">11011000</text>
+</g>
+</svg>

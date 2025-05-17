@@ -1,0 +1,202 @@
+import { CodeBlock } from '@site/src/components/code-block';
+
+# Итераторы
+
+<dfn>Итератор</dfn> в JavaScript — объект, который позволяет обращаться
+к элементам коллекции по одному за раз, отслеживая своё текущее положение
+внутри последовательности.
+
+Для того, чтобы объект был *итерируемым*, в нём должен быть реализован
+метод итератора, доступный через свойство `[Symbol.iterator]`. Этот метод
+не принимает аргументов и должен возвращать объект, соответствующий протоколу
+итератора.
+
+Если объект является итерируемым, с ним можно использовать цикл `for..of`
+и оператор spread. Некоторые встроенные типы (`Array`, `Map`, `Set` и др.)
+являются итерируемыми.
+
+## Протокол итератора {#protocol}
+
+Объект является итератором, если в нем определён метод `next`, реализующий
+следующую логику.
+
+Метод возвращает объект с двумя свойствами: `done` и `value`.
+
++ `done`:
+    - `true`, если итератор достиг конца, в этом случае свойство `value`
+      может определять *возвращаемое значение итератора*
+    - `false`, если итератор может генерировать следующее значение
+      последовательности; отсутствие свойства эвквивалентно `false`
++ `value`: любое JavaScript значение, возвращаемое итератором;
+  может быть опущено, если done имеет значение `true`
+
+Опционально у итератора может быть метод `return`, который может принимать
+аргумент и использоваться для явного завершения итерации и возврата заданного
+значения. Данный метод должен возвращать объект с такой же логикой, как и метод
+`next`.
+
+## Пример {#example}
+
+<CodeBlock theme={'idea'} ligatures={false} tokens={[
+  {"type": "keyword.js", "value": "class"},
+  {"type": "", "value": " MyRange "},
+  {"type": "keyword.js", "value": "implements"},
+  {"type": "", "value": " Iterable<"},
+  {"type": "keyword.js", "value": "number"},
+  {"type": "", "value": ">, Iterator<"},
+  {"type": "keyword.js", "value": "number"},
+  {"type": "", "value": "> {"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  "},
+  {"type": "keyword.js", "value": "public readonly"},
+  {"type": "", "value": " "},
+  {"type": "identifier.field.js", "value": "from"},
+  {"type": "", "value": ": "},
+  {"type": "keyword.js", "value": "number"},
+  {"type": "", "value": ";"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  "},
+  {"type": "keyword.js", "value": "public readonly"},
+  {"type": "", "value": " "},
+  {"type": "identifier.field.js", "value": "to"},
+  {"type": "", "value": ": "},
+  {"type": "keyword.js", "value": "number"},
+  {"type": "", "value": ";"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  "},
+  {"type": "keyword.js", "value": "private"},
+  {"type": "", "value": " "},
+  {"type": "identifier.field.js", "value": "current"},
+  {"type": "", "value": ": "},
+  {"type": "keyword.js", "value": "number"},
+  {"type": "", "value": ";"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  "},
+  {"type": "keyword.js", "value": "constructor"},
+  {"type": "", "value": "(from: "},
+  {"type": "keyword.js", "value": "number"},
+  {"type": "", "value": ", to: "},
+  {"type": "keyword.js", "value": "number"},
+  {"type": "", "value": ") {"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "    "},
+  {"type": "keyword.js", "value": "this"},
+  {"type": "", "value": "."},
+  {"type": "identifier.field.js", "value": "from"},
+  {"type": "", "value": " = from;"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "    "},
+  {"type": "keyword.js", "value": "this"},
+  {"type": "", "value": "."},
+  {"type": "identifier.field.js", "value": "to"},
+  {"type": "", "value": " = to;"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  }"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  "},
+  {"type": "keyword.js", "value": "public"},
+  {"type": "", "value": " ["},
+  {"type": "identifier.function.js", "value": "Symbol"},
+  {"type": "", "value": "."},
+  {"type": "identifier.field.js", "value": "iterator"},
+  {"type": "", "value": "](): Iterator<"},
+  {"type": "keyword.js", "value": "number"},
+  {"type": "", "value": "> {"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "    "},
+  {"type": "keyword.js", "value": "this"},
+  {"type": "", "value": "."},
+  {"type": "identifier.field.js", "value": "current"},
+  {"type": "", "value": " = "},
+  {"type": "keyword.js", "value": "this"},
+  {"type": "", "value": "."},
+  {"type": "identifier.field.js", "value": "from"},
+  {"type": "", "value": ";"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "    "},
+  {"type": "keyword.js", "value": "return this"},
+  {"type": "", "value": ";"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  }"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  "},
+  {"type": "keyword.js", "value": "public"},
+  {"type": "", "value": " "},
+  {"type": "identifier.method.js", "value": "next"},
+  {"type": "", "value": "(): IteratorResult<"},
+  {"type": "keyword.js", "value": "number"},
+  {"type": "", "value": "> {"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "    "},
+  {"type": "keyword.js", "value": "if"},
+  {"type": "", "value": " ("},
+  {"type": "keyword.js", "value": "this"},
+  {"type": "", "value": "."},
+  {"type": "identifier.field.js", "value": "current"},
+  {"type": "", "value": " <= "},
+  {"type": "keyword.js", "value": "this"},
+  {"type": "", "value": "."},
+  {"type": "identifier.field.js", "value": "to"},
+  {"type": "", "value": ") {"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "      "},
+  {"type": "keyword.js", "value": "return"},
+  {"type": "", "value": " {"},
+  {"type": "identifier.field.js", "value": "value"},
+  {"type": "", "value": ": "},
+  {"type": "keyword.js", "value": "this"},
+  {"type": "", "value": "."},
+  {"type": "identifier.field.js", "value": "current"},
+  {"type": "", "value": "++};"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "    } "},
+  {"type": "keyword.js", "value": "else"},
+  {"type": "", "value": " {"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "      "},
+  {"type": "keyword.js", "value": "return"},
+  {"type": "", "value": " {"},
+  {"type": "identifier.field.js", "value": "done"},
+  {"type": "", "value": ": "},
+  {"type": "keyword.js", "value": "true"},
+  {"type": "", "value": "};"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "    }"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  }"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "}"},
+  {"type": "", "value": "\n"}
+]}/>
+
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "keyword.js", "value": "const"},
+  {"type": "", "value": " range = "},
+  {"type": "keyword.operator.js", "value": "new"},
+  {"type": "", "value": " MyRange("},
+  {"type": "number.js", "value": "0"},
+  {"type": "", "value": ", "},
+  {"type": "number.js", "value": "4"},
+  {"type": "", "value": ");"},
+  {"type": "", "value": "\n"},
+  {"type": "keyword.js", "value": "const"},
+  {"type": "", "value": " values = [...range]; "},
+  {"type": "comment.js", "value": "// [0, 1, 2, 3, 4]"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "\n"},
+  {"type": "keyword.js", "value": "for"},
+  {"type": "", "value": " ("},
+  {"type": "keyword.js", "value": "const"},
+  {"type": "", "value": " value "},
+  {"type": "keyword.js", "value": "of"},
+  {"type": "", "value": " range) "},
+  {"type": "identifier.constant.global.js", "value": "console"},
+  {"type": "", "value": "."},
+  {"type": "identifier.method.js", "value": "log"},
+  {"type": "", "value": "(value);"},
+  {"type": "", "value": "\n"},
+  {"type": "comment.js", "value": "// 0 1 2 3 4"}
+]}/>

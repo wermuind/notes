@@ -1,0 +1,16 @@
+* text=auto
+
+# Source code
+*.md   text eol=lf
+*.mdx  text eol=lf
+*.html text eol=lf
+*.css  text eol=lf
+*.scss text eol=lf
+*.js   text eol=lf
+*.ts   text eol=lf
+*.tsx  text eol=lf
+
+# Text assets
+*.txt  text eol=lf
+*.json text eol=lf
+*.svg  text eol=lf

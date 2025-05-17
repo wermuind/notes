@@ -1,0 +1,119 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme="dark"] {
+  --ifm-color-primary: #76d09d;
+  --ifm-color-primary-dark: #5ec88c;
+  --ifm-color-primary-darker: #52c483;
+  --ifm-color-primary-darkest: #3aaa6b;
+  --ifm-color-primary-light: #8ed8ae;
+  --ifm-color-primary-lighter: #9adcb7;
+  --ifm-color-primary-lightest: #bfe9d1;
+  --ifm-background-color: #22272b;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* --- Article Style Overrides --- */
+
+article {
+  /* text */
+  --text: #c5d1d1;            /* Light Gray */
+  --text-aside: #909395;      /* Spanish Gray */
+  --text-attract: #ece0cc;    /* Bone */
+  --text-important: #91d392;  /* Granny Smith Apple */
+  /* background */
+  --back: #22272b;            /* Charleston Green */
+  /* primary color */
+  --primary-300: #282d31;     /* Gunmetal */
+  --primary-500: #33373b;     /* Onyx */
+  --primary-600: #383c40;     /* Onyx */
+  --primary-700: #4a4e51;     /* Davys Gray */
+  /* secondary color */
+  --secondary-300: #6b8e67;   /* Russian Green */
+  --secondary-500: #98a786;   /* Artichoke */
+  --secondary-700: #bac3ac;   /* Laurel Green */
+}
+
+article .markdown h2, article .markdown h3 {
+  padding: 0;
+  margin: 0.8em 0 0.4em;
+}
+
+article p {
+  margin: 0.5em 0;
+  line-height: 1.5;
+}
+article ul, article ol {
+  margin: 0.5em 0;
+}
+
+article .markdown h4 {
+  margin: 0.5em 0;
+  font-size: 1.1rem;
+}
+
+article dfn {
+  font-style: normal;
+  font-weight: bold;
+  color: #abdda4;
+}
+
+article img {
+  width: 100%;
+}
+
+article code:not([class]) {
+  margin: 0;
+  padding: 0.05rem 0.15rem;
+  white-space: nowrap;
+  font: 13px 'JetBrains Mono', monospace;
+  font-variant-ligatures: none;
+  border-radius: 4px;
+  background-color: #424342;
+}
+
+article .markdown li {
+  margin-top: 0;
+}
+
+article table {
+  margin: 1em 0;
+  border-collapse: collapse;
+}
+article thead tr {
+  border-bottom: none;
+}
+
+article thead th, article thead td {
+  font-weight: bold;
+  background-color: #383c40;
+}
+article td, article th {
+  padding: 0.1em 0.5em;
+  border: 1px solid #909395;
+  background-color: var(--back);
+}
+
+article hr {
+  height: 1px;
+  margin: 0.5em 0;
+  border: none;
+  background-color: #51575e;
+}

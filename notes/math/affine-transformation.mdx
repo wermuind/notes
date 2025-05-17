@@ -1,0 +1,59 @@
+import { RectScale } from '@site/src/components/rect-scale';
+
+# Аффинные преобразования
+
+<dfn>Аффинное преобразование</dfn> — это геометрическое преобразование, которое
+сохраняет прямые и параллельность, но не обязательно расстояния и углы.
+
+### Движение {#translation}
+
+Преобразование, которое перемещает каждую точку фигуры на одно и то же
+расстояние в заданном направлении.
+
+$$
+\begin{pmatrix}
+x \\
+y
+\end{pmatrix}
++
+\begin{pmatrix}
+dx \\
+dy
+\end{pmatrix}
+\rArr
+\begin{pmatrix}
+x' \\
+y'
+\end{pmatrix}
+$$
+
+### Масштабирование {#scaling}
+
+Преобразование, которое увеличивает или уменьшает объекты на заданный
+коэффициент, одинаковый во всех направлениях.
+
+$$
+\begin{pmatrix}
+  kx & 0 \\
+  0 & ky
+\end{pmatrix}
+\begin{pmatrix}
+  x \\
+  y
+\end{pmatrix}
+\rArr
+\begin{pmatrix}
+  x' \\
+  y'
+\end{pmatrix}
+$$
+
+Масштабирование прямоугольника относительно точки:
+
+```text
+rect |> translate |> scale |> translate
+```
+
+#### Пример для прямоугольника: {#rect-scale-example}
+
+<RectScale/>

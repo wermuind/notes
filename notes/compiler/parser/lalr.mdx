@@ -1,0 +1,234 @@
+import { CodeBlock } from '@site/src/components/code-block';
+
+# LALR
+
+Реализация: **LALR-by-SLR**.
+
+1. LR(0) item sets & translation table
+2. Extended grammar
+3. FIRST sets
+4. FOLLOW sets
+5. Action & goto table
+   + initialize
+   + gotos
+   + shifts
+   + reductions
+
+## Item set collection
+
+### Item
+
+**Item** (элемент) — это правило грамматики с позицией.<br/>
+Позиция как правило обозначается точкой.
+
++ $$ A \to \cdot B $$ означает "$$ B $$ вот-вот встретится"
++ $$ A \to B \cdot $$ означает "$$ B $$ только что встретился"
+
+### Алгоритм CLOSURE {#algorithm-closure}
+
+Если $$ I $$ — множество элементов грамматики $$ G $$, тогда $$ CLOSURE(I) $$
+_(замыкание)_ — это множество элементов, построенное из $$ I $$ по следующим
+шагам:
+
+1. Множество инициализируется всеми элементами из $$ I $$.
+2. Если элемент $$ A \to \alpha \cdot B \beta $$ находится во множестве
+   (т.е. непосредственно за точкой следует нетерминал) и $$ B \to \delta $$ —
+   правило грамматики, то во множество добавляется элемент
+   $$ B \to \cdot \delta $$, если его ещё нет.
+3. Предыдущий шаг повторяется до тех пор, пока добавляются новые элементы.
+
+Множество элементов, которые были добавлены на этапе инициализации, называется
+**ядром**.
+
+<details>
+<summary>Пример</summary>
+
+Грамматика:
+
+<ol start="0">
+  <li>$$ S \to N $$</li>
+  <li>$$ N \to V=E $$</li>
+  <li>$$ N \to E $$</li>
+  <li>$$ E \to V $$</li>
+  <li>$$ V \to x $$</li>
+  <li>$$ V \to *E $$</li>
+</ol>
+
+Начальный набор: $$ \Set{ S \to \cdot N } $$
+
+$$
+\begin{cases}
+  \boxed{ S \to \cdot N }
+\end{cases}
+\rArr
+\begin{cases}
+  \boxed{ S \to \cdot N }       \\
+  \color{beige} N \to \cdot V=E \\
+  \color{beige} N \to \cdot E
+\end{cases}
+  \rArr
+\begin{cases}
+  \boxed{ S \to \cdot N }     \\
+  N \to \cdot V=E             \\
+  N \to \cdot E               \\
+  \color{beige}V \to \cdot x  \\
+  \color{beige}V \to \cdot *E \\
+  \color{beige}E \to \cdot V
+\end{cases}
+$$
+
+</details>
+
+### Алгоритм GOTO {#algorithm-goto}
+
+Если $$ I $$ — множество элементов, а $$ X $$ — символ грамматики, то
+$$ GOTO(I, X) $$ определяется как замыкание таких элементов
+$$ A \to \alpha X \cdot \beta $$, что элемент $$ A \to \alpha \cdot X \beta $$
+принадлежит $$ I $$.
+
+Этот алгоритм используется для определения переходов между состояниями LR(0)
+автомата. Набор состояний конечного автомата соответствует множествам
+элементов, а GOTO определяет переход из $$ I $$ при вводе $$ X $$.
+
+## Расширенная грамматика {#extended-grammar}
+
+Обозначения:
+
++ $$ {_0 * _2} \equiv I_0 \overset{*}{\to} I_2 $$ — переход от $$ I_0 $$ к
+  $$ I_2 $$ через подачу на вход $$ * $$
++ $$ {_2 E _6} \equiv I_2 \overset{E}{\to} I_6 $$ — переход от $$ I_2 $$ к
+  $$ I_6 $$ через подачу на вход $$ E $$
++ $$ {_0 V _3} \equiv I_0 \overset{V}{\to} I_3 $$ — переход от $$ I_0 $$ к
+  $$ I_3 $$ через подачу на вход $$ V $$
+
+Общий шаблон:
+
+$$
+{{\color{coral}_a} S _b} \to
+{{\color{coral}_a} X {\color{orange}_c}} \space
+{{\color{orange}_c} Y {\color{orange}_d}} \space
+{{\color{orange}_d} Z _e}
+$$
+
+Для пустого правила конечная точка это первая цифра:
+
+$$
+{{\color{coral}_i} X _j} \to \epsilon
+$$
+
+## FIRST и FOLLOW {#first-follow}
+
+<dfn>Множество FIRST</dfn> для символа в КС-грамматике — это множество
+терминальных символов, которые могут появиться в начале строк, выводимых
+из символа.
+
+<dfn>Множество FOLLOW</dfn> для символа в КС-грамматике — это множество
+терминальных символов, которые могут следовать непосредственно за данным
+символов в выводе (развёртывании).
+
+### Алгоритм построения FIRST {#algorithm-first}
+
+```python
+# T  - terminals
+# NT - non-terminals
+# P  - rules in grammar
+
+for a in [*T, EOF, EPS]:
+  FIRST(a) = a
+
+for A in NT:
+  FIRST(A) = set()
+
+while FIRST changes:
+  for A -> b[1..k] in P:
+    rhs = FIRST(b[1]) - { EPS }
+    i = 1
+
+    # adding first for eps-gen symbols
+    while EPS in FIRST(b[i]) and i <= k - 1:
+      rhs |= FIRST(b[i + 1]) - { EPS }
+      i += 1
+    if i == k and EPS in FIRST(b[k]):
+      rhs |= { EPS }
+    FIRST(A) |= rhs
+```
+
+### Алгоритм построения FOLLOW {#algorithm-follow}
+
+```python
+# NT - non-terminals
+# P  - rules in grammar
+
+for A in NT:
+  FOLLOW(A) = set()
+
+FOLLOW(S) = { EOF }
+
+while FOLLOW changes:
+  for A -> b[1..k] in P:
+    trailer = FOLLOW(A)
+    for i in range(k, 0, -1):
+      if b[i] in NT:
+        FOLLOW(b[i]) |= trailer
+        if EPS in FIRST(b[i]):
+          trailer |= FIRST(b[i]) - { EPS }
+        else:
+          trailer = FIRST(b[i])
+      else:
+        trailer = FIRST(b[i])
+```
+
+## Генерация таблицы
+
+Разрешение конфликтов:
+1. shift/reduce $$\to$$ shift
+2. reduce/reduce $$\to$$ reduce по более длинному правилу
+
+## Проблемные правила
+
+Для правила ниже возникает неоднозначность, которую нельзя разрешить
+имея lookahead в один токен.
+
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "", "value": "params\n  : "},
+  {"type": "string.regex.text.js", "value": "'('"},
+  {"type": "", "value": " (param ("},
+  {"type": "string.regex.text.js", "value": "','"},
+  {"type": "", "value": " param)"},
+  {"type": "string.regex.quantifier.js", "value": "*"},
+  {"type": "", "value": " "},
+  {"type": "string.regex.text.js", "value": "','"},
+  {"type": "string.regex.quantifier.js", "value": "?"},
+  {"type": "", "value": ")"},
+  {"type": "string.regex.quantifier.js", "value": "?"},
+  {"type": "", "value": " "},
+  {"type": "string.regex.text.js", "value": "')'"},
+  {"type": "", "value": "\n  ;"},
+]}/>
+
+Решением как правило является преобразование грамматики.
+
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "", "value": "params\n  : "},
+  {"type": "string.regex.text.js", "value": "'('"},
+  {"type": "", "value": " param ("},
+  {"type": "string.regex.text.js", "value": "','"},
+  {"type": "", "value": " param)"},
+  {"type": "string.regex.quantifier.js", "value": "*"},
+  {"type": "", "value": " "},
+  {"type": "string.regex.text.js", "value": "')'"},
+  {"type": "", "value": "\n  | "},
+  {"type": "string.regex.text.js", "value": "'('"},
+  {"type": "", "value": " (param "},
+  {"type": "string.regex.text.js", "value": "','"},
+  {"type": "", "value": ")"},
+  {"type": "string.regex.quantifier.js", "value": "*"},
+  {"type": "", "value": " "},
+  {"type": "string.regex.text.js", "value": "')'"},
+  {"type": "", "value": "\n  ;"},
+]}/>
+
+--- --- ---
+
+Очень подробное описание на примере простой грамматики:<br/>
+[https://web.cs.dal.ca/~sjackson/lalr1.html](https://web.archive.org/web/20211216015406/https://web.cs.dal.ca/~sjackson/lalr1.html)

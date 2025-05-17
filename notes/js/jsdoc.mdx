@@ -1,0 +1,95 @@
+import { CodeBlock } from '@site/src/components/code-block';
+
+# JSDoc
+
+<dfn>JSDoc</dfn> — инструмент для документирования кода JavaScript и TypeScript.
+
+Перед классом, функцией, методом, переменной и т.п. оставляется комментарий,
+начинающийся на две звёздочки: `/** ... */`. Внутри поддерживается Markdown.
+
+## Теги {#tags}
+
+### Для описания всего файла {#tags-file}
+
++ `@fileoverview` — краткое описание содержимого файла
++ `@author` — имя разработчика
+
+### Общего назначения {#tags-common}
+
++ `@example` — пример того, как может работать сущность
++ `@see` — описывает связь с другим объектом
++ `@deprecated` — маркирует сущность устаревшей и не рекомендуемой
++ `@internal` — маркирует сущность внутренней, не входящей в public API
+
+### Для функций и методов {#tags-fn}
+
++ `@param` — описывает аргумент функции
++ `@return` — описывает возвращаемое значение
++ `@throws` — описывает исключения, выбрасываемые функцией
+
+### Актуальные только для JavaScript {#tags-js}
+
++ `@type` — маркер типа
++ `@public`, `@private`, `@protected`, `@readonly` — модификаторы доступа
+
+## Пример {#example}
+
+<CodeBlock theme={'idea'} ligatures={false} tokens={[
+  {"type": "comment.doc.ts", "value": "/**"},
+  {"type": "", "value": "\n"},
+  {"type": "comment.doc.ts", "value": " * Округляет число до заданного количества знаков после запятой."},
+  {"type": "", "value": "\n"},
+  {"type": "comment.doc.ts", "value": " * "},
+  {"type": "comment.doc.tag.ts", "value": "@param"},
+  {"type": "comment.doc.ts", "value": " "},
+  {"type": "comment.doc.value.ts", "value": "n"},
+  {"type": "comment.doc.ts", "value": " число, которое нужно округлить"},
+  {"type": "", "value": "\n"},
+  {"type": "comment.doc.ts", "value": " * "},
+  {"type": "comment.doc.tag.ts", "value": "@param"},
+  {"type": "comment.doc.ts", "value": " "},
+  {"type": "comment.doc.value.ts", "value": "digits"},
+  {"type": "comment.doc.ts", "value": " количество знаков после запятой"},
+  {"type": "", "value": "\n"},
+  {"type": "comment.doc.ts", "value": " * "},
+  {"type": "comment.doc.tag.ts", "value": "@example"},
+  {"type": "", "value": "\n"},
+  {"type": "comment.doc.ts", "value": " * round(0.234, 2) => 0.23"},
+  {"type": "", "value": "\n"},
+  {"type": "comment.doc.ts", "value": " * round(234, -2) => 200"},
+  {"type": "", "value": "\n"},
+  {"type": "comment.doc.ts", "value": " */"},
+  {"type": "", "value": "\n"},
+  {"type": "keyword.ts", "value": "function"},
+  {"type": "", "value": " "},
+  {"type": "identifier.function.declaration.ts", "value": "round"},
+  {"type": "", "value": "(n: "},
+  {"type": "keyword.ts", "value": "number"},
+  {"type": "", "value": ", digits: "},
+  {"type": "keyword.ts", "value": "number"},
+  {"type": "", "value": " = "},
+  {"type": "number.ts", "value": "0"},
+  {"type": "", "value": "): "},
+  {"type": "keyword.ts", "value": "number"},
+  {"type": "", "value": " {"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  "},
+  {"type": "keyword.ts", "value": "const"},
+  {"type": "", "value": " multiplier = "},
+  {"type": "identifier.constant.global.ts", "value": "Math"},
+  {"type": "", "value": "."},
+  {"type": "identifier.method.ts", "value": "pow"},
+  {"type": "", "value": "("},
+  {"type": "number.ts", "value": "10"},
+  {"type": "", "value": ", digits);"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "  "},
+  {"type": "keyword.ts", "value": "return"},
+  {"type": "", "value": " "},
+  {"type": "identifier.constant.global.ts", "value": "Math"},
+  {"type": "", "value": "."},
+  {"type": "identifier.method.ts", "value": "round"},
+  {"type": "", "value": "(n * multiplier) / multiplier;"},
+  {"type": "", "value": "\n"},
+  {"type": "", "value": "}"}
+]}/>
