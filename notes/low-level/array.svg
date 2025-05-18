@@ -1,0 +1,26 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 570 110">
+<g fill="none" stroke="#98c8f5">
+  <rect x="80" y="40" width="400" height="30" fill="#2e3848" stroke="none"/>
+  <path d="M10,40L560,40 M10,70L560,70"/>
+  <path d="M30,40L30,70 M80,40L80,70 M130,40L130,70 M180,40L180,70 M230,40L230,70 M280,40L280,70 M330,40L330,70 M380,40L380,70 M430,40L430,70 M480,40L480,70 M530,40L530,70"/>
+</g>
+<g fill="none" stroke="#999">
+  <path d="M80,85L480,85"/>
+  <path d="M80,80L80,90 M180,80L180,90 M280,80L280,90 M380,80L380,90 M480,80L480,90"/>
+</g>
+<g fill="#ccc" font-family="JetBrains Mono" font-size="14" text-anchor="middle">
+  <text x="285" y="15" font-size="16"><tspan fill="#82d2ce">let</tspan> arr: [<tspan fill="#87c3ff">i16</tspan>; <tspan fill="#ebc88d">4</tspan>] = [-<tspan fill="#ebc88d">1</tspan>, <tspan fill="#ebc88d">0</tspan>, <tspan fill="#ebc88d">1</tspan>, <tspan fill="#ebc88d">2</tspan>];</text>
+  <text x="130" y="105">arr[<tspan fill="#ebc88d">0</tspan>]</text>
+  <text x="230" y="105">arr[<tspan fill="#ebc88d">1</tspan>]</text>
+  <text x="330" y="105">arr[<tspan fill="#ebc88d">2</tspan>]</text>
+  <text x="430" y="105">arr[<tspan fill="#ebc88d">3</tspan>]</text>
+  <text x="105" y="60">FF</text>
+  <text x="155" y="60">FF</text>
+  <text x="205" y="60">00</text>
+  <text x="255" y="60">00</text>
+  <text x="305" y="60">01</text>
+  <text x="355" y="60">00</text>
+  <text x="405" y="60">02</text>
+  <text x="455" y="60">00</text>
+</g>
+</svg>

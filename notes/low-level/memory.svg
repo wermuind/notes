@@ -1,0 +1,26 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 80" font-family="JetBrains Mono">
+<g fill="none" stroke="#98c8f5">
+  <rect x="1" y="30" width="798" height="40"/>
+  <path d="M100,30L100,70M200,30L200,70M300,30L300,70M400,30L400,70M500,30L500,70M600,30L600,70M700,30L700,70"/>
+</g>
+<g fill="#f3e5cf" font-size="16" text-anchor="middle">
+  <text x="50" y="22">0xA001</text>
+  <text x="150" y="22">0xA002</text>
+  <text x="250" y="22">0xA003</text>
+  <text x="350" y="22">0xA004</text>
+  <text x="450" y="22">0xA005</text>
+  <text x="550" y="22">0xA006</text>
+  <text x="650" y="22">0xA007</text>
+  <text x="750" y="22">0xA008</text>
+</g>
+<g fill="#ccc" font-size="18" text-anchor="middle">
+  <text x="50" y="57">01001101</text>
+  <text x="150" y="57">10011101</text>
+  <text x="250" y="57">01000011</text>
+  <text x="350" y="57">11110101</text>
+  <text x="450" y="57">01001110</text>
+  <text x="550" y="57">00100010</text>
+  <text x="650" y="57">11000011</text>
+  <text x="750" y="57">01010111</text>
+</g>
+</svg>

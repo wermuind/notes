@@ -1,0 +1,355 @@
+import { CodeBlock } from '@site/src/components/code-block';
+
+# Регулярные выражения
+
+## Обзор {#overview}
+
+<dfn>Regular Expression</dfn> (regex) — шаблоны, используемые для сопоставления
+последовательностей символов в строках.
+
+Регулярные выражения повсеместно используются при работе со строками
+и реализованы (нативно или через библиотеки) во всех развитых языках.
+
+### Возможности {#capabilities}
+
++ поиск совпадений в строке
++ поиск совпадений с заменой
++ разбиение строки на части
++ тест строки на совпадение шаблону
+
+#### Пример поиска совпадений в тексте:
+
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "string.regex.js", "value": "/"},
+  {"type": "", "value": "("},
+  {"type": "string.regex.text.js", "value": "the"},
+  {"type": "string.regex.operator.js", "value": "|"},
+  {"type": "string.regex.text.js", "value": "an"},
+  {"type": "string.regex.quantifier.js", "value": "?"},
+  {"type": "", "value": ")"},
+  {"type": "string.regex.metacharacter.js", "value": "\\s"},
+  {"type": "", "value": "("},
+  {"type": "string.regex.metacharacter.js", "value": "\\w"},
+  {"type": "string.regex.quantifier.js", "value": "+"},
+  {"type": "", "value": ")"},
+  {"type": "string.regex.js", "value": "/gi"},
+]}/>
+
+<CodeBlock theme={'idea'} styles={{
+  g1: {backgroundColor: '#517533', borderRadius: '0.1em', padding: '0.1em 0.2em'},
+  g2: {backgroundColor: '#405c77', borderRadius: '0.1em', padding: '0.1em 0.2em'},
+  g3: {backgroundColor: '#684230', borderRadius: '0.1em', padding: '0.1em 0.2em'},
+}} tokens={[
+  {"type": "", "value": "Even after you did "},
+  {"style": "g1", "value": "the"},
+  {"style": "g2", "value": " "},
+  {"style": "g3", "value": "initial"},
+  {"type": "", "value": " work and had "},
+  {"style": "g1", "value": "a"},
+  {"style": "g2", "value": " "},
+  {"style": "g3", "value": "specific"},
+  {"type": "", "value": " architecture\nin mind, "},
+  {"type": "", "value": "you need to continuously monitor how "},
+  {"style": "g1", "value": "the"},
+  {"style": "g2", "value": " "},
+  {"style": "g3", "value": "system"},
+  {"type": "", "value": " evolves\nand whether it still "},
+  {"type": "", "value": "aligns with its users' needs, as those may also\n"},
+  {"type": "", "value": "change during "},
+  {"style": "g1", "value": "the"},
+  {"style": "g2", "value": " "},
+  {"style": "g3", "value": "development"},
+  {"type": "", "value": " and lifetime of your software. "},
+  {"type": "", "value": "Software\ndecay, sometimes also called erosion, occurs when "},
+  {"style": "g1", "value": "the"},
+  {"style": "g2", "value": " "},
+  {"style": "g3", "value": "implementation"},
+  {"type": "", "value": "\ndecisions don't correspond to "},
+  {"style": "g1", "value": "the"},
+  {"style": "g2", "value": " "},
+  {"style": "g3", "value": "planned"},
+  {"type": "", "value": " architecture."},
+]}/>
+
+## Синтаксис {#syntax}
+
+Шаблон строится из элементов, которые предствляют из себя определённое
+подмножество символов с заданным числом повторений и/или дополнительных
+ограничений. Элементы могут быть объединены в **группы** с целью получения
+более сложной структуры или захвата отдельных частей совпадения.
+
+| Выражение | Значение                       | Пример          |
+|-----------|--------------------------------|-----------------|
+| `\`       | экранирование                  | `\[0\]`         |
+| `\|`      | логическое "или"               | `yes\|no`       |
+| `[]`      | перечисление вариантов         | `[Rr]eg[Ee]xp?` |
+| `-`       | внутри `[]` означает диапазон  | `[a-f]`         |
+| `^`       | внутри `[]` означает отрицание | `[^a-f]`        |
+| `()`      | конструктор группы             | `([a-z])\.com`  |
+
+### Квантификаторы {#quantifiers}
+
+Квантификатор повторяет элемент определенное количество раз;
+ставится после элемента, к которому он относится.
+
+| Квантификатор | Число повторений       |
+|---------------|------------------------|
+| `?`           | 0 или 1                |
+| `*`           | 0 или более            |
+| `+`           | 1 или более            |
+| `{n}`         | ровно n раз            |
+| `{m,n}`       | от m до n включительно |
+| `{m,}`        | не менее m             |
+| `{,n}`        | не более n             |
+
+#### Примеры:
+
++ `an?` — буква a, за которой может следовать n
++ `[01]*` — любое количество нулей и/или единиц
++ `#[0-9a-f]{6}` — решётка, за которой следует 6 цифр и/или букв от a до f
+
+### Метасимволы {#metacharacters}
+
+**Метасимвол** (символьный класс) — специальное обозначение, которое
+соответствует любому символу из определённого набора.
+
+<table>
+  <thead>
+  <tr>
+    <td>Метасимвол</td>
+    <td>Значение</td>
+    <td>Отрицание</td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><code>.</code></td>
+    <td colSpan="2">Любой символ</td>
+  </tr>
+  <tr>
+    <td><code>\d</code></td>
+    <td>Цифровой символ: <code>[0-9]</code></td>
+    <td><code>\D</code></td>
+  </tr>
+  <tr>
+    <td><code>\s</code></td>
+    <td>Пробельный символ: <code>[\f\n\r\t\v]</code></td>
+    <td><code>\S</code></td>
+  </tr>
+  <tr>
+    <td><code>\w</code></td>
+    <td>Буквы или цифры или нижнее подчёркивание</td>
+    <td><code>\W</code></td>
+  </tr>
+  <tr>
+    <td><code>\b</code></td>
+    <td>Граница слова</td>
+    <td><code>\B</code></td>
+  </tr>
+  <tr>
+    <td><code>^</code></td>
+    <td colSpan="2">Начало строки</td>
+  </tr>
+  <tr>
+    <td><code>$</code></td>
+    <td colSpan="2">Конец строки</td>
+  </tr>
+  </tbody>
+</table>
+
+### Lookarounds
+
+Накладывают дополнительное ограничение на элемент:
+если совпадение найдено, проверяется, что находится до или после него.
+
+| Выражение | Название            |
+|-----------|---------------------|
+| `(?= )`   | lookahead           |
+| `(?! )`   | negative lookahead  |
+| `(?<= )`  | lookbehind          |
+| `(?<! )`  | negative lookbehind |
+
+#### Примеры:
+
++ `look(?= for)` — находит `look`, только если после следует ` for`
++ `Java(?!Script)` — находит `Java`, только если после НЕ следует `Script`
++ `(?<= ")[\w ]+(?=" )` — находит слова, перед которыми стоит ` "` и после
+которых стоит `" `
+
+### Группы {#groups}
+
+Группа обозначается с помощью скобок. По умолчанию каждая группа "захватывается"
+(т.е. попадает в результат), а её идентификатором служит порядковый номер.
+Изменить стандартное поведение можно с помощью следующего синтаксиса:
+
++ `(?<name> )` — именованная группа (named group)
++ `(?: )` — группа без захвата (non-capturing group)
+
+#### Примеры:
+
++ `(?:an? )(?<word>\w+)` — находит слова, перед которыми стоит
+неопределённый артикль и заносит их в именную группу `word`
++ `(\w+)(?: +\n)(\w+)` — находит 2 слова на разных строках, между которыми
+перед переносом стоят пробелы; в массив групп попадают только слова
+
+### Флаги {#flags}
+
+Позволяют модифицировать шаблон целиком и задавать ему какое-либо поведение.
+
++ `g` (<span style={{color: '#52b0ce'}}>g</span>lobal) — поиск не останавливается
+после первого найденного совпадения
++ `i` (<span style={{color: '#52b0ce'}}>i</span>nsensitive) — делает шаблон
+нечувствительным к регистру
++ `u` (<span style={{color: '#52b0ce'}}>u</span>nicode) — включает полную
+поддержку Юникода
++ `y` (stick<span style={{color: '#52b0ce'}}>y</span>) — привязка к началу
+шаблона или к концу последнего совпадения
+
+## JavaScript RegExp {#regexp}
+
+Синтаксис регулярных выражений в JavaScript вдохновлен
+[Perl](https://www.perl.org).<br/>
+Есть два способа создания регулярного выражения: литерал и конструктор класса.
+
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "keyword.js", "value": "const"},
+  {"type": "", "value": " re1 = "},
+  {"type": "string.regex.js", "value": "/"},
+  {"type": "string.regex.anchor.js", "value": "^"},
+  {"type": "", "value": "["},
+  {"type": "string.regex.text.js", "value": "a"},
+  {"type": "string.regex.operator.js", "value": "-"},
+  {"type": "string.regex.text.js", "value": "zа"},
+  {"type": "string.regex.operator.js", "value": "-"},
+  {"type": "string.regex.text.js", "value": "я"},
+  {"type": "", "value": "]"},
+  {"type": "string.regex.quantifier.js", "value": "+"},
+  {"type": "string.regex.anchor.js", "value": "$"},
+  {"type": "string.regex.js", "value": "/iu"},
+  {"type": "", "value": ";"},
+  {"type": "", "value": "\n"},
+  {"type": "keyword.js", "value": "const"},
+  {"type": "", "value": " re2 = "},
+  {"type": "keyword.operator.js", "value": "new"},
+  {"type": "", "value": " RegExp("},
+  {"type": "string.js", "value": "'"},
+  {"type": "string.regex.anchor.js", "value": "^"},
+  {"type": "", "value": "["},
+  {"type": "string.regex.text.js", "value": "a"},
+  {"type": "string.regex.operator.js", "value": "-"},
+  {"type": "string.regex.text.js", "value": "zа"},
+  {"type": "string.regex.operator.js", "value": "-"},
+  {"type": "string.regex.text.js", "value": "я"},
+  {"type": "", "value": "]"},
+  {"type": "string.regex.quantifier.js", "value": "+"},
+  {"type": "string.regex.anchor.js", "value": "$"},
+  {"type": "string.js", "value": "'"},
+  {"type": "", "value": ", "},
+  {"type": "string.js", "value": "'iu'"},
+  {"type": "", "value": ");"},
+  {"type": "", "value": "\n"}
+]}/>
+
+### Методы строк {#string-methods}
+
++ `.match` — поиск совпадения в строке (вернёт массив)
++ `.search` — поиск совпадения в строке (вернёт индекс)
++ `.replace` — поиск совпадения и замена
++ `.split` — разбиение строки на массив подстрок
+
+#### Примеры:
+
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "string.js", "value": "'a b_c'"},
+  {"type": "", "value": "."},
+  {"type": "identifier.method.js", "value": "match"},
+  {"type": "", "value": "("},
+  {"type": "string.regex.js", "value": "/"},
+  {"type": "", "value": "["},
+  {"type": "string.regex.text.js", "value": " _"},
+  {"type": "", "value": "]"},
+  {"type": "string.regex.js", "value": "/g"},
+  {"type": "", "value": ");  "},
+  {"type": "comment.js", "value": "// [' ', '_']"},
+  {"type": "", "value": "\n"},
+  {"type": "string.js", "value": "'a b_c'"},
+  {"type": "", "value": "."},
+  {"type": "identifier.method.js", "value": "search"},
+  {"type": "", "value": "("},
+  {"type": "string.regex.js", "value": "/"},
+  {"type": "", "value": "["},
+  {"type": "string.regex.text.js", "value": " _"},
+  {"type": "", "value": "]"},
+  {"type": "string.regex.js", "value": "/"},
+  {"type": "", "value": ");  "},
+  {"type": "comment.js", "value": "// 1"},
+  {"type": "", "value": "\n"},
+  {"type": "string.js", "value": "'a b_c'"},
+  {"type": "", "value": "."},
+  {"type": "identifier.method.js", "value": "split"},
+  {"type": "", "value": "("},
+  {"type": "string.regex.js", "value": "/"},
+  {"type": "", "value": "["},
+  {"type": "string.regex.text.js", "value": " _"},
+  {"type": "", "value": "]"},
+  {"type": "string.regex.js", "value": "/"},
+  {"type": "", "value": ");   "},
+  {"type": "comment.js", "value": "// ['a', 'b', 'c']"},
+  {"type": "", "value": "\n"}
+]}/>
+
+### Методы RegExp {#regexp-methods}
+
++ `.test` — тест строки на совпадение шаблону
+
+#### Примеры:
+
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "string.regex.js", "value": "/"},
+  {"type": "string.regex.anchor.js", "value": "^"},
+  {"type": "string.regex.text.js", "value": "0b"},
+  {"type": "", "value": "["},
+  {"type": "string.regex.text.js", "value": "01"},
+  {"type": "", "value": "]"},
+  {"type": "string.regex.quantifier.js", "value": "+"},
+  {"type": "string.regex.anchor.js", "value": "$"},
+  {"type": "string.regex.js", "value": "/"},
+  {"type": "", "value": "."},
+  {"type": "identifier.method.js", "value": "test"},
+  {"type": "", "value": "("},
+  {"type": "string.js", "value": "'0b10011010'"},
+  {"type": "", "value": ");  "},
+  {"type": "comment.js", "value": "// true"},
+  {"type": "", "value": "\n"},
+  {"type": "string.regex.js", "value": "/"},
+  {"type": "string.regex.anchor.js", "value": "^"},
+  {"type": "string.regex.text.js", "value": "0b"},
+  {"type": "", "value": "["},
+  {"type": "string.regex.text.js", "value": "01"},
+  {"type": "", "value": "]"},
+  {"type": "string.regex.quantifier.js", "value": "+"},
+  {"type": "string.regex.anchor.js", "value": "$"},
+  {"type": "string.regex.js", "value": "/"},
+  {"type": "", "value": "."},
+  {"type": "identifier.method.js", "value": "test"},
+  {"type": "", "value": "("},
+  {"type": "string.js", "value": "'0x20A1D014'"},
+  {"type": "", "value": ");  "},
+  {"type": "comment.js", "value": "// false"},
+  {"type": "", "value": "\n"}
+]}/>
+
+--- --- ---
+
+#### Ссылки:
+
+<div style={{display: 'flex', gap: '2em'}}>
+  <ul>
+    <li><a href={'https://regex101.com'} target={'_blank'}>regex101.com</a></li>
+    <li><a href={'https://regexr.com'} target={'_blank'}>regexr.com</a></li>
+  </ul>
+  <ul>
+    <li><a href={'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions'} target={'_blank'}>RegExp MDN</a></li>
+    <li><a href={'https://learn.javascript.ru/regular-expressions'} target={'_blank'}>RegExp JavaScript.ru</a></li>
+  </ul>
+</div>

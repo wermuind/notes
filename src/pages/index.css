@@ -1,0 +1,45 @@
+.index-header {
+  background-color: #93C890;
+}
+
+.index-header h1 {
+  margin: 0;
+  padding: 1em;
+  color: #22272b;
+  text-align: center;
+}
+
+/* --- */
+
+.index-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: stretch;
+  gap: 1em;
+  padding: 1em;
+}
+
+@media screen and (max-width: 700px) {
+  .index-sections {
+    grid-template-columns: 1fr;
+  }
+}
+
+.index-sections a {
+  padding: 1em;
+  background-color: #202227;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  color: rgba(235, 235, 245, 0.6);
+}
+
+.index-sections a:hover {
+  text-decoration: none;
+  background-color: #31323a;
+}
+
+.index-sections h2 {
+  color: rgba(255, 255, 245, 0.86);
+  font-size: 17px;
+  font-weight: bold;
+}

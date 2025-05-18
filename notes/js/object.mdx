@@ -1,0 +1,103 @@
+import { CodeBlock } from '@site/src/components/code-block';
+
+# Объекты в JS
+
+Объект в JavaScript определяется [спецификацией][ecma] как набор **свойств**.
+
+Каждое свойство принадлежит одному из двух типов:
++ *data property* (свойство данных)
++ *accessor property* (свойство доступа)
+
+[ecma]: https://262.ecma-international.org/#sec-object-type
+
+### Data property
+
+Свойство данных связывает значение ключа со значением и набором логических
+атрибутов:
+
++ `value` — значение свойства (*ECMAScript value*)
++ `writable` — логический атрибут, по умолчанию false; если false, значение
+  не может быть изменено
++ `enumerable` — логический атрибут, по умолчанию false; если true,
+  свойство может участвовать в итерировании посредством "for-in"
++ `configurable` — логический атрибут, по умолчанию false; если false, свойство
+  не может быть удалено, нельзя изменить его тип (data и accessor), нельзя
+  изменить никакие атрибуты, кроме `value` и выставления `writable` в false
+
+### Accessor property
+
+Свойство доступа связывает значение ключа с одной или двумя *функциями доступа*
+и набором логических атрибутов.
+
++ `get` — функция, возвращающая значение объекта
++ `set` — функция, вызываемая при попытке присвоить значение свойству
++ `enumerable` — аналогично data property
++ `configurable` — аналогично data property
+
+### Ключи {#key}
+
+Свойства идентифицируются с помощью ключей. Ключи используются для доступа
+к свойствам и их значениям.
+
+**Ключ свойства** (property key) — `String` или `Symbol`.<br/>
+**Имя свойства** (property name) — ключ, который является строковым значением.
+
+**Целочисленный индекс** — строковый ключ свойства, который является
+канонической числовой строкой и числовое значение которого неотрицательно.<br/>
+**Индекс массива** — целочисленный индекс, числовое значение которого находится
+в диапазоне от 0 до 2<sup>32</sup> - 1.
+
+### Пример
+
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "keyword.js", "value": "const"},
+  {"type": "", "value": " point = {"},
+  {"type": "identifier.field.js", "value": "x"},
+  {"type": "", "value": ": "},
+  {"type": "number.js", "value": "0"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "y"},
+  {"type": "", "value": ": "},
+  {"type": "number.js", "value": "1"},
+  {"type": "", "value": "};"},
+]}/>
+
+<CodeBlock theme={'idea'} tokens={[
+  {"type": "", "value": "{\n  "},
+  {"type": "identifier.field.js", "value": "x"},
+  {"type": "", "value": ": {"},
+  {"type": "identifier.field.js", "value": "value"},
+  {"type": "", "value": ": "},
+  {"type": "number.js", "value": "0"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "writable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "enumerable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "configurable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": "},\n  "},
+  {"type": "identifier.field.js", "value": "y"},
+  {"type": "", "value": ": {"},
+  {"type": "identifier.field.js", "value": "value"},
+  {"type": "", "value": ": "},
+  {"type": "number.js", "value": "1"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "writable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "enumerable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": ", "},
+  {"type": "identifier.field.js", "value": "configurable"},
+  {"type": "", "value": ": "},
+  {"type": "boolean.js", "value": "true"},
+  {"type": "", "value": "},\n}\n"},
+]}/>

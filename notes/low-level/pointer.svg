@@ -1,0 +1,26 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 80">
+<g fill="#2e3848" stroke="none">
+  <rect x="30" y="30" width="240" height="20"/>
+  <rect x="390" y="30" width="120" height="20"/>
+</g>
+<g fill="none" stroke="#98c8f5">
+  <path d="M10,30L530,30 M10,50L530,50"/>
+  <path d="M30,30L30,50 M60,30L60,50 M90,30L90,50 M120,30L120,50 M150,30L150,50 M180,30L180,50 M210,30L210,50 M240,30L240,50 M270,30L270,50 M300,30L300,50 M330,30L330,50 M360,30L360,50 M390,30L390,50 M420,30L420,50 M450,30L450,50 M480,30L480,50 M510,30L510,50"/>
+</g>
+<g fill="none" stroke="#999">
+  <path d="M150,55 C200,75,390,85,405,55"/>
+  <path d="M405,55 L398,59 L401.5,60 L402,63 L405,55" fill="#999"/>
+  <path d="M405,14L405,26"/>
+</g>
+<g fill="#ccc" font-family="JetBrains Mono" font-size="11" text-anchor="middle">
+  <text x="45" y="44">CC</text>
+  <text x="75" y="44">F9</text>
+  <text x="105" y="44">DF</text>
+  <text x="135" y="44">59</text>
+  <text x="165" y="44">1B</text>
+  <text x="195" y="44">00</text>
+  <text x="225" y="44">00</text>
+  <text x="255" y="44">00</text>
+  <text x="435" y="10" fill="#f3e5cf">0x1B59DFF9CC</text>
+</g>
+</svg>

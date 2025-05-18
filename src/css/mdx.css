@@ -1,0 +1,100 @@
+/* --- Article Cards --- */
+
+.article-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5em;
+}
+
+.article-cards a {
+  padding: 1em;
+  border-radius: 4px;
+  background-color: #232425;
+  border: 1px solid transparent;
+  transition: border 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.article-cards a:hover {
+  border: 1px solid #7c8d9d;
+}
+
+.article-cards .card-desc {
+  color: #e3e3e3;
+  font-size: 0.9em;
+}
+
+/* --- Code Block --- */
+
+.code-block ::selection {
+  background-color: #98a786;
+  color: #22272b;
+}
+
+.code-block pre {
+  margin: 16px 0;
+  padding: 8px;
+  font: 14px 'JetBrains Mono', monospace;
+  box-shadow: 0 0 4px 0 #191d1f;
+  border-radius: 2px;
+  color: #d4d4d4;
+  background-color: #1e1e1e;
+  overflow-y: auto;
+  line-height: 1.5;
+  cursor: text;
+}
+
+/* Theme: IDEA */
+
+pre.idea {
+  color: #bcbec4;
+  background-color: #1e1f22;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.5;
+}
+
+pre.idea .light-gray { color: #bcbec4; }
+pre.idea .gray { color: #7a7e85; }
+pre.idea .orange { color: #cf8e6d; }
+pre.idea .yellow { color: #ffcc88; }
+pre.idea .green { color: #6aab73; }
+pre.idea .dark-green { color: #5f826b; }
+pre.idea .turquoise { color: #2aacb8; }
+pre.idea .blue { color: #56a8f5; }
+pre.idea .light-blue { color: #42c3d4; }
+pre.idea .magenta { color: #c77dbb; }
+pre.idea .purple { color: #b5b6e3; }
+pre.idea .dark-purple { color: #9373a5; }
+pre.idea .teal { color: #5f8c8a; }
+pre.idea .shamrock { color: #67a37c; }
+pre.idea .pear { color: #908b25; }
+pre.idea .olive-green { color: #b3ae60; }
+pre.idea .bold { font-weight: bold; }
+pre.idea .italic { font-style: italic; }
+pre.idea .underline { text-decoration: underline; }
+
+/* Theme: Fleet Dark */
+
+pre.fleet-dark {
+  color: #d1d1d1;
+  background-color: #181818;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.7;
+}
+
+pre.fleet-dark .gray-90 { color: #898989; }
+pre.fleet-dark .blue { color: #87c3ff; }
+pre.fleet-dark .pink { color: #e394dc; }
+pre.fleet-dark .orange { color: #e09b70; }
+pre.fleet-dark .yellow { color: #ebc88d; }
+pre.fleet-dark .cyan { color: #82d2ce; }
+pre.fleet-dark .lime { color: #a8cc7c; }
+pre.fleet-dark .violet { color: #af9cff; }
+pre.fleet-dark .coral { color: #cc7c8a; }
+pre.fleet-dark .bold { font-weight: bold; }
+pre.fleet-dark .italic { font-style: italic; }
+pre.fleet-dark .underline { text-decoration: underline; }
+pre.fleet-dark .inline-hint { display: none; }

@@ -1,0 +1,13 @@
+# Dependencies
+node_modules
+
+# Generated files
+.docusaurus
+
+# Build
+build
+
+# IDE
+.vs
+.vscode
+.idea
