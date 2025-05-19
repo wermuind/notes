@@ -43,3 +43,9 @@
   font-size: 17px;
   font-weight: bold;
 }
+
+.index-description {
+  margin: 0 auto;
+  padding: 0 16px;
+  max-width: 120ch;
+}
