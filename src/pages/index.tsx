@@ -20,7 +20,7 @@ export default function Home() {
         <h1>{title}</h1>
       </header>
       <main className={'index-sections'}>
-        <Section link={'/category/общее'} title={'Общее'}>
+        <Section link={'/common'} title={'Общее'}>
           Заметки на общие темы.
         </Section>
         <Section link={'/cpp'} title={'C++'}>
