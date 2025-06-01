@@ -39,7 +39,7 @@ export default function Home() {
             <li>Синтаксический анализ</li>
           </ul>
         </Section>
-        <Section link={'/category/низкоуровневое-программирование'} title={'Низкоуровневое программирование'}>
+        <Section link={'/low-level'} title={'Low Level'}>
           <ul>
             <li>Архитектура процессора</li>
             <li>Аппаратный стек</li>

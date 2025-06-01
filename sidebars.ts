@@ -24,12 +24,12 @@ const sidebar: SidebarsConfig[string] = [
         type: 'category', label: 'Язык',
         link: {type: 'generated-index', title: 'Язык'},
         items: [
-          'cpp/language/reference',
-          'cpp/language/constructor',
-          'cpp/language/casting',
-          'cpp/language/iterator',
-          'cpp/language/copy-elision',
-          'cpp/language/code-splitting',
+          {type: 'doc', id: 'cpp/language/reference', label: 'Ссылки'},
+          {type: 'doc', id: 'cpp/language/constructor', label: 'Конструкторы и деструктор'},
+          {type: 'doc', id: 'cpp/language/casting', label: 'Приведение типов'},
+          {type: 'doc', id: 'cpp/language/iterator', label: 'Итераторы'},
+          {type: 'doc', id: 'cpp/language/copy-elision', label: 'Copy elision'},
+          {type: 'doc', id: 'cpp/language/code-splitting', label: 'Разделение кода'},
         ],
       },
       {
@@ -91,8 +91,8 @@ const sidebar: SidebarsConfig[string] = [
     ],
   },
   {
-    type: 'category', label: 'Низкоуровневое программирование',
-    link: {type: 'generated-index', title: 'Низкоуровневое программирование'},
+    type: 'category', label: 'Low Level',
+    link: {type: 'doc', id: 'low-level/index'},
     items: [
       {type: 'doc', id: 'low-level/cpu', label: 'Процессор'},
       {type: 'doc', id: 'low-level/data-structures', label: 'Структуры данных'},
